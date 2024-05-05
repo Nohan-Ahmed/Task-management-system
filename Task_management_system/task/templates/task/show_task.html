@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container pt-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for task in tasks %}
+    <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{task.taskTitle}}</h5>
+            <p class="card-text">{{task.taskDescription}}</p>
+          </div>
+
+          <div class="card-footer">
+            {% if task.is_completed %}
+            <button disabled="disabled" class='btn btn-success'>Completed</button>
+            {% else %}
+            <a href="{% url "task:edit_task" task.id %}" class='btn btn-warning'>Edit</a>
+            <a href="{% url "task:delete_task" task.id %}" class='btn btn-danger'>Delete</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+  
+    {% endfor %}
+</div>
+</div>
+{% endblock content %}
